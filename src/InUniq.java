@@ -16,13 +16,13 @@ public class InUniq {
     private boolean printCountOfLines = false;
 
     @Option(name = "-s")
-    private int numIgnoreChars = 1;
+    private int numIgnoreChars = 0;
 
     @Option(name = "-o")
-    private String outFile = "";
+    private String outFile = null;
 
     @Argument()
-    private String inFile = "";
+    private String inFile = null;
 
     public static void main(String[] args) throws IOException {
         new InUniq().launch(args);
