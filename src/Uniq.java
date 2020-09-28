@@ -28,11 +28,11 @@ public class Uniq {
     }
 
     public void runUniq() throws IOException {
-        int counterUniq = 0;
-        int counter = 1;
-        ArrayList<Integer> listOfCounters = new ArrayList<>();
-        ArrayList<String> strings = new ArrayList<>();
 
+        int counter = 1;
+
+        ArrayList<String> strings = new ArrayList<>();
+        ArrayList<String> uniqStr = new ArrayList<>();
         Scanner in = new Scanner(System.in);
         if (!inFile.equals("")) {
             strings.addAll(Files.readAllLines(Paths.get(inFile)));
@@ -44,65 +44,58 @@ public class Uniq {
         ArrayList<String> newStrings = new ArrayList<>();
         newString = strings.get(0);
         newStrings.add(newString);
-        if (!printCountOfLines) {
 
-            if (!ignoreRegister) {
+        if (!ignoreRegister) {
 
-                for (int i = 1; i < strings.size(); i++)
-                    if (!newString.substring(numIgnoreChars - 1).
+            for (int i = 1; i < strings.size(); i++)
+                if (!newString.substring(numIgnoreChars - 1).
                             equals(strings.get(i).substring(numIgnoreChars - 1))) {
-                        newStrings.add(strings.get(i));
-                        newString = strings.get(i);
-                    }
-
-            } else {
-                for (int i = 1; i < strings.size(); i++)
-                    if (!newString.substring(numIgnoreChars - 1).toLowerCase()
-                            .equals(strings.get(i).substring(numIgnoreChars - 1).toLowerCase())) {
-                        newStrings.add(strings.get(i));
-                        newString = strings.get(i);
-                    }
-            }
+                    newStrings.set(newStrings.size() - 1 , counter + " " + newString);
+                    if (counter == 1) uniqStr.add(counter + " " + newString);
+                    newString = strings.get(i);
+                    counter = 1;
+                    newStrings.add(newString);
+                } else counter++ ;
 
         } else {
-            if (!ignoreRegister) {
-
-                for (int i = 1; i < strings.size(); i++)
-                    if (!newString.substring(numIgnoreChars - 1).
-                            equals(strings.get(i).substring(numIgnoreChars - 1))) {
-                        newStrings.set(newStrings.size() - 1 , counter + " " + newString);
-                        newString = strings.get(i);
-                        counter = 1;
-                        newStrings.add(newString);
-                    } else counter++ ;
-
-            } else {
-                for (int i = 1; i < strings.size(); i++)
-                    if (!newString.substring(numIgnoreChars - 1).toLowerCase()
-                            .equals(strings.get(i).substring(numIgnoreChars - 1).toLowerCase())) {
-                        newStrings.set(newStrings.size() - 1 , counter + " " + newString);
-                        newString = strings.get(i);
-                        counter = 1;
-                        newStrings.add(newString);
-                    } else counter++ ;
-            }
-            newStrings.set(newStrings.size() - 1 , counter + " " + newString);
+            for (int i = 1; i < strings.size(); i++)
+                if (!newString.substring(numIgnoreChars - 1).toLowerCase()
+                        .equals(strings.get(i).substring(numIgnoreChars - 1).toLowerCase())) {
+                    newStrings.set(newStrings.size() - 1 , counter + " " + newString);
+                    if (counter == 1) uniqStr.add(newString);
+                    newString = strings.get(i);
+                    counter = 1;
+                    newStrings.add(newString);
+                } else counter++ ;
         }
+            newStrings.set(newStrings.size() - 1 , counter + " " + newString);
 
+
+        if (printOnlyUniqLines) newStrings = uniqStr;
         if (!outFile.equals("")) {
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outFile)));
-            for (String element : strings) {
-                writer.write(element);
+            if (printCountOfLines) {
+                for (String element : strings) {
+                    writer.write(element);
+                    writer.write("\n");
+                }
+            } else for (String element : strings) {
+                writer.write(element.substring(element.indexOf(" ") + 1));
                 writer.write("\n");
             }
+
         } else {
-            for (String element : newStrings) {
-                System.out.println(element);
+            if (printCountOfLines) {
+                for (String element : newStrings) {
+                    System.out.println(element);
+                }
+                System.out.println(1
+                );
+            } else {
+                for (String element : newStrings) {
+                    System.out.println(element.substring(element.indexOf(" ") + 1));
+                }
             }
         }
-
-
     }
 }
-
-

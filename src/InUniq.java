@@ -16,7 +16,7 @@ public class InUniq {
     private boolean printCountOfLines = false;
 
     @Option(name = "-s")
-    private int numIgnoreChars = 1;
+    private int numIgnoreChars = 0;
 
     @Option(name = "-o")
     private String outFile = "";
