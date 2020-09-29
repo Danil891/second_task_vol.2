@@ -73,7 +73,7 @@ public class Uniq {
             writer.write(element.second());
             writer.write("\n");
         }
-        writer.close();
+        writer.flush();
         return countAndString;
     }
 }
