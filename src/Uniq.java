@@ -24,7 +24,7 @@ public class Uniq {
         this.inFile = inFile;
     }
 
-    public void runUniq() throws IOException {
+    public ArrayList<Pair> runUniq() throws IOException {
         ArrayList<String> strings = new ArrayList<>();
         Scanner in = new Scanner(System.in);
         if (inFile != null) {
@@ -74,5 +74,6 @@ public class Uniq {
             writer.write("\n");
         }
         writer.close();
+        return countAndString;
     }
 }
