@@ -26,4 +26,13 @@ public class Pair {
     public String toString(){
         return first + " " + second;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null) return false;
+        if (getClass() != object.getClass()) return false;
+        Pair pair = (Pair) object;
+        return first.equals(pair.first) && second.equals(pair.second);
+    }
 }

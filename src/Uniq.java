@@ -13,6 +13,7 @@ public class Uniq {
     private String outFile;
     private String inFile;
     private String newString;
+    private ArrayList<Pair> countAndString = new ArrayList<>();
 
     public Uniq(boolean ignoreRegister, boolean printOnlyUniqLines, boolean printCountOfLines,
                 int numIgnoreChars, String outFile, String inFile) {
@@ -24,7 +25,7 @@ public class Uniq {
         this.inFile = inFile;
     }
 
-    public ArrayList<Pair> runUniq() throws IOException {
+    public void runUniq() throws IOException {
         ArrayList<String> strings = new ArrayList<>();
         Scanner in = new Scanner(System.in);
         if (inFile != null) {
@@ -34,18 +35,21 @@ public class Uniq {
             strings.add(line);
         }
 
-        ArrayList<Pair> countAndString = new ArrayList<>();
+        //countAndString = new ArrayList<>();
         newString = strings.get(0);
-        String checkString = "";
+        //String checkString = "";
         int counter = 1;
         countAndString.add(new Pair(counter, newString));
 
         for (int i = 1; i < strings.size(); i++) {
-            checkString = newString;
+            String checkString = newString;
             newString = strings.get(i);
-            if (ignoreRegister) {
+
+            if (ignoreRegister && i == 1) {
                 newString = newString.toLowerCase();
                 checkString = checkString.toLowerCase();
+            } else if (ignoreRegister){
+                newString = newString.toLowerCase();
             }
 
             if (!newString.substring(numIgnoreChars).equals(checkString.substring(numIgnoreChars))) {
@@ -56,8 +60,9 @@ public class Uniq {
         }
         countAndString.get(countAndString.size()  -1).setFirst(counter);
 
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
-        if (outFile != null) writer = new BufferedWriter(new FileWriter(new File(outFile)));
+        BufferedWriter writer ;
+        if (outFile != null)  writer = new BufferedWriter(new FileWriter(new File(outFile)));
+        else  writer = new BufferedWriter(new OutputStreamWriter(System.out));
 
         if (printOnlyUniqLines){
             ListIterator<Pair> iter = countAndString.listIterator();
@@ -66,7 +71,7 @@ public class Uniq {
 
         if (printCountOfLines) {
             for (Pair element : countAndString) {
-                writer.write(String.valueOf(element));
+                writer.write(element.toString());
                 writer.write("\n");
             }
         } else for (Pair element : countAndString) {
@@ -74,6 +79,8 @@ public class Uniq {
             writer.write("\n");
         }
         writer.flush();
+    }
+    public ArrayList<Pair> getPairs(){
         return countAndString;
     }
 }

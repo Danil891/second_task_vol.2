@@ -24,8 +24,12 @@ public class InUniq {
     @Argument()
     private String inFile = null;
 
-    public static void main(String[] args) throws IOException {
-        new InUniq().launch(args);
+    public static void main(String[] args)  {
+        try {
+            new InUniq().launch(args);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void launch(String[] args) throws IOException {
