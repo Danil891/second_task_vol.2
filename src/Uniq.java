@@ -58,17 +58,17 @@ public class Uniq {
             } else counter++;
         }
         countAndString.get(countAndString.size()  -1).setFirst(counter);
+
+        if (printOnlyUniqLines){
+            ListIterator<Pair> iter = countAndString.listIterator();
+            while(iter.hasNext()) if (iter.next().first() != 1) iter.remove();
+        }
     }
 
     public void printer() throws IOException{
         BufferedWriter writer ;
         if (outFile != null)  writer = new BufferedWriter(new FileWriter(new File(outFile)));
         else  writer = new BufferedWriter(new OutputStreamWriter(System.out));
-
-        if (printOnlyUniqLines){
-            ListIterator<Pair> iter = countAndString.listIterator();
-            while(iter.hasNext()) if (iter.next().first() != 1) iter.remove();
-        }
 
         if (printCountOfLines) {
             for (Pair element : countAndString) {
