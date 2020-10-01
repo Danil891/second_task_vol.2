@@ -24,11 +24,13 @@ public class InUniq {
     @Argument()
     private String inFile = null;
 
-    public static void main(String[] args)  {
+    public static void main(String[] args)   {
         try {
             new InUniq().launch(args);
-        } catch (IOException e){
-            e.printStackTrace();
+        } catch (IOException FileSystemProvider){
+            System.err.println(FileSystemProvider.getMessage());
+            System.err.println("Check name file");
+            System.exit(-3);
         }
     }
 

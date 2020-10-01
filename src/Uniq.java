@@ -39,27 +39,27 @@ public class Uniq {
 
         countAndString.add(new Pair(counter, newString));
 
-        if (ignoreRegister) newString = newString.toLowerCase();
+        if (ignoreRegister) newString = newString.toLowerCase().substring(numIgnoreChars);
+        
 
         for (int i = 1; i < strings.size(); i++) {
             String checkString = newString;
 
             if (ignoreRegister) {
                 newString = strings.get(i).toLowerCase();
+            } else {
+                newString = strings.get(i).substring(numIgnoreChars);
             }
 
-            else{
-                newString = strings.get(i);
-            }
-            if (!newString.substring(numIgnoreChars).equals(checkString.substring(numIgnoreChars))) {
+            if (!newString.equals(checkString)) {
                 countAndString.get(countAndString.size()  -1).setFirst(counter);
                 countAndString.add(new Pair(counter, strings.get(i)));
                 counter = 1;
             } else counter++;
         }
         countAndString.get(countAndString.size()  -1).setFirst(counter);
-        printer();
     }
+
     public void printer() throws IOException{
         BufferedWriter writer ;
         if (outFile != null)  writer = new BufferedWriter(new FileWriter(new File(outFile)));
