@@ -151,6 +151,7 @@ public class tests {
         Uniq uniq = new Uniq(false, false,true,
                 0,"outFile.txt", "checkFile.txt");
         uniq.runUniq();
+        uniq.printer();
         List<String> exp = new ArrayList<>(Files.readAllLines(Paths.get("exp.txt")));
         List<String> act = new ArrayList<>(Files.readAllLines(Paths.get("outFile.txt")));
         assertEquals(exp, act);
@@ -162,6 +163,7 @@ public class tests {
         Uniq uniq = new Uniq(true, true, true,
                 0, "outFile.txt", "checkFile.txt");
         uniq.runUniq();
+        uniq.printer();
         List<String> expU = new ArrayList<>(Files.readAllLines(Paths.get("expU.txt")));
         List<String> act = new ArrayList<>(Files.readAllLines(Paths.get("outFileU.txt")));
         assertEquals(expU, act);
@@ -173,6 +175,7 @@ public class tests {
         Uniq uniq = new Uniq(true, false, true,
                 0, "outFile.txt", "checkFile.txt");
         uniq.runUniq();
+        uniq.printer();
         List<String> expU = new ArrayList<>(Files.readAllLines(Paths.get("expI.txt")));
         List<String> act = new ArrayList<>(Files.readAllLines(Paths.get("outFile.txt")));
         assertEquals(expU, act);
@@ -183,6 +186,7 @@ public class tests {
         Uniq uniq = new Uniq(false, false, true,
                 5, "outFile.txt", "checkFile.txt");
         uniq.runUniq();
+        uniq.printer();
         List<String> expU = new ArrayList<>(Files.readAllLines(Paths.get("expS.txt")));
         List<String> act = new ArrayList<>(Files.readAllLines(Paths.get("outFile.txt")));
         assertEquals(expU, act);
@@ -194,6 +198,7 @@ public class tests {
         Uniq uniq = new Uniq(false, false,false,
                 0,"outFile.txt", "checkFile.txt");
         uniq.runUniq();
+        uniq.printer();
         List<String> exp = new ArrayList<>(Files.readAllLines(Paths.get("expC.txt")));
         List<String> act = new ArrayList<>(Files.readAllLines(Paths.get("outFile.txt")));
         assertEquals(exp, act);

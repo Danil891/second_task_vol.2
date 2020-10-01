@@ -12,7 +12,6 @@ public class Uniq {
     private Integer numIgnoreChars;
     private String outFile;
     private String inFile;
-    private String newString;
     private ArrayList<Pair> countAndString = new ArrayList<>();
 
     public Uniq(boolean ignoreRegister, boolean printOnlyUniqLines, boolean printCountOfLines,
@@ -35,23 +34,23 @@ public class Uniq {
             strings.add(line);
         }
 
-        //countAndString = new ArrayList<>();
-        newString = strings.get(0);
-        //String checkString = "";
+        String newString = strings.get(0);
         int counter = 1;
+
         countAndString.add(new Pair(counter, newString));
+
+        if (ignoreRegister) newString = newString.toLowerCase();
 
         for (int i = 1; i < strings.size(); i++) {
             String checkString = newString;
-            newString = strings.get(i);
 
-            if (ignoreRegister && i == 1) {
-                newString = newString.toLowerCase();
-                checkString = checkString.toLowerCase();
-            } else if (ignoreRegister){
-                newString = newString.toLowerCase();
+            if (ignoreRegister) {
+                newString = strings.get(i).toLowerCase();
             }
 
+            else{
+                newString = strings.get(i);
+            }
             if (!newString.substring(numIgnoreChars).equals(checkString.substring(numIgnoreChars))) {
                 countAndString.get(countAndString.size()  -1).setFirst(counter);
                 countAndString.add(new Pair(counter, strings.get(i)));
@@ -59,7 +58,9 @@ public class Uniq {
             } else counter++;
         }
         countAndString.get(countAndString.size()  -1).setFirst(counter);
-
+        printer();
+    }
+    public void printer() throws IOException{
         BufferedWriter writer ;
         if (outFile != null)  writer = new BufferedWriter(new FileWriter(new File(outFile)));
         else  writer = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -72,11 +73,11 @@ public class Uniq {
         if (printCountOfLines) {
             for (Pair element : countAndString) {
                 writer.write(element.toString());
-                writer.write("\n");
+                writer.newLine();
             }
         } else for (Pair element : countAndString) {
             writer.write(element.second());
-            writer.write("\n");
+            writer.newLine();
         }
         writer.flush();
     }
