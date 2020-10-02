@@ -208,7 +208,7 @@ public class tests {
     public void CheckerOutFileWithIgnoreCharAndReg() throws IOException {
 
         Uniq uniq = new Uniq(true, false,false,
-                5,"outFile.txt", "checkFile.txt");
+                2,"outFile.txt", "checkFile2.txt");
         uniq.runUniq();
         uniq.printer();
         List<String> exp = new ArrayList<>(Files.readAllLines(Paths.get("expIN.txt")));
