@@ -215,4 +215,16 @@ public class tests {
         List<String> act = new ArrayList<>(Files.readAllLines(Paths.get("outFile.txt")));
         assertEquals(exp, act);
     }
+    @Test
+    public void CheckerOutFileWithIgnoreCharAndReg2() throws IOException {
+
+        Uniq uniq = new Uniq(true, false,false,
+                4,"outFile.txt", "checkFile2.txt");
+        uniq.runUniq();
+        uniq.printer();
+        List<String> exp = new ArrayList<>(Files.readAllLines(Paths.get("expIN2.txt")));
+        List<String> act = new ArrayList<>(Files.readAllLines(Paths.get("outFile.txt")));
+        assertEquals(exp, act);
+    }
+
 }

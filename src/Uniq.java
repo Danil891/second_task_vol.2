@@ -46,7 +46,7 @@ public class Uniq {
             String checkString = newString;
 
             if (ignoreRegister) {
-                newString = strings.get(i).toLowerCase();
+                newString = strings.get(i).substring(numIgnoreChars).toLowerCase();
             } else {
                 newString = strings.get(i).substring(numIgnoreChars);
             }
