@@ -40,7 +40,7 @@ public class Uniq {
         countAndString.add(new Pair(counter, newString));
 
         if (ignoreRegister) newString = newString.substring(numIgnoreChars).toLowerCase();
-        
+        else newString = newString.substring(numIgnoreChars);
 
         for (int i = 1; i < strings.size(); i++) {
             String checkString = newString;
