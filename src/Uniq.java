@@ -39,7 +39,7 @@ public class Uniq {
 
         countAndString.add(new Pair(counter, newString));
 
-        if (ignoreRegister) newString = newString.toLowerCase().substring(numIgnoreChars);
+        if (ignoreRegister) newString = newString.substring(numIgnoreChars).toLowerCase();
         
 
         for (int i = 1; i < strings.size(); i++) {
